@@ -1,0 +1,8 @@
+# python
+*.pyc
+
+/.idea
+/images
+/data/bbox*
+/data/tfrecords
+/models
