@@ -15,7 +15,7 @@ from object_detection.utils import visualization_utils as vis_util
 
 # What model to download.
 # MODEL_NAME = '/home/viraj-uk/Documents/exp01'
-MODEL_NAME = '/home/viraj-uk/Documents/aoe3/models/exp15'
+MODEL_NAME = '/home/viraj-uk/Documents/exp01'
 # MODEL_FILE = MODEL_NAME + '.tar.gz'
 # DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
 
@@ -23,7 +23,7 @@ MODEL_NAME = '/home/viraj-uk/Documents/aoe3/models/exp15'
 PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
 
 # List of the strings that is used to add correct label for each box.
-PATH_TO_LABELS = '/home/viraj-uk/Documents/aoe3/models/exp15/damage_label_map.pbtxt'
+PATH_TO_LABELS = '/home/viraj-uk/Documents/aoeiii/data/aoeiii_label_map.pbtxt'
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
@@ -49,7 +49,8 @@ def main():
                 if tensor_name in all_tensor_names:
                     tensor_dict[key] = tf.get_default_graph().get_tensor_by_name(
                         tensor_name)
-            cap = cv2.VideoCapture("/home/viraj-uk/Documents/aoe3_bck/video/aoe_iii_snow_hills.mp4")
+
+            cap = cv2.VideoCapture("/home/viraj-uk/Videos/age3y_1.mp4")
 
             image_tensor = tf.get_default_graph().get_tensor_by_name('image_tensor:0')
 
@@ -72,13 +73,16 @@ def main():
 
             while True:
                 ret, image_np = cap.read()
+
+                image_np = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
+
                 # print('yeah')
                 # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
                 # image_np_expanded = np.expand_dims(image_np, axis=0)
                 # Actual detection.
 
-                # if count % 4 == 0:
-                if True:
+                if count % 3 == 0:
+                # if True:
                     output_dict = run_inference_for_single_image(image_np, detection_graph)
 
                     # print(output_dict['detection_boxes'])
@@ -99,8 +103,8 @@ def main():
 
 
 
-                # cv2.imshow('object detection', cv2.resize(image_np, (960, 540)))
-                cv2.imshow('object detection', image_np)
+                    cv2.imshow('object detection', cv2.resize(cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR), (1366, 768)))
+                # cv2.imshow('object detection', image_np)
                 #cv2.waitKey(1)
 
                 count +=1

@@ -6,3 +6,4 @@
 /data/bbox*
 /data/tfrecords
 /models
+/object_detection

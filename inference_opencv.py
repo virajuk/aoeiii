@@ -11,7 +11,7 @@ from object_detection.utils import ops as utils_ops
 
 from object_detection.utils import label_map_util
 
-from object_detection.utils import visualization_utils as vis_util
+from object_detection.utils import visualization_utils__ as vis_util
 
 # What model to download.
 MODEL_NAME = '/home/viraj-uk/Documents/exp01'
@@ -53,12 +53,14 @@ def run_inference_for_single_image(image, graph):
               tensor_name)
 
       image_tensor = tf.get_default_graph().get_tensor_by_name('image_tensor:0')
+
       # print(image.shape)
+
       # Run inference
       output_dict = sess.run(tensor_dict, feed_dict={image_tensor: np.expand_dims(image, 0)})
-
       image = np.expand_dims(image, 0)
       # print(image.shape)
+      # output_dict = sess.run(tensor_dict, feed_dict={image_tensor: image})
 
       # all outputs are float32 numpy arrays, so convert types as appropriate
       output_dict['num_detections'] = int(output_dict['num_detections'][0])
@@ -75,17 +77,27 @@ def load_image_into_numpy_array(image):
       (im_height, im_width, 3)).astype(np.uint8)
 
 def main():
+
     # for image_path in TEST_IMAGE_PATHS:
 
+    # image_path = '/home/viraj-uk/Documents/aoe3/data/test_im/98.jpeg'
+    # image_path = '/home/viraj-uk/Pictures/aoe.png'
     image_path = '/home/viraj-uk/Pictures/aoe.png'
-    image = Image.open(image_path)
+    # image = Image.open(image_path)
+    # image_np = cv2.imread(image_path)
+    image_np = cv2.imread(image_path, cv2.COLOR_RGB2BGR)
+    # im_rgb = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
+
 
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
-    image_np = load_image_into_numpy_array(image)
+    # image_np = load_image_into_numpy_array(image)
 
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np, detection_graph)
+
+    # print(image_np)
+    # print(type(image_np))
 
     # Visualization of the results of a detection.
     vis_util.visualize_boxes_and_labels_on_image_array(
@@ -99,7 +111,8 @@ def main():
         use_normalized_coordinates=True,
         line_thickness=4)
 
-    new_im = Image.fromarray(image_np)
-    new_im.show()
+    cv2.imshow('hello', image_np)
+    cv2.waitKey()
 
+# cap = cv2.VideoCapture("/home/viraj-uk/Documents/aoe3_bck/video/aoe_iii_snow_hills.mp4")
 main()
