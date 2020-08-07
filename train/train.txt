@@ -1,0 +1,30 @@
+python object_detection\model_main.py --logtostderr --model_dir=D:\ssd_aoeiii\model_dir\ --pipeline_config_path=D:\ssd_aoeiii\train\faster_rcnn_inception_v2_pets.config
+python object_detection\train.py --logtostderr --train_dir="D:\ssd_aoeiii\model_dir\\" --pipeline_config_path="D:\ssd_aoeiii\\train\\faster_rcnn_inception_v2_pets.config"
+C:\Users\viraj\OneDrive\Documents\tensorflow\research
+
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path D:\ssd_aoeiii\train\faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix D:\ssd_aoeiii\model_dir\model.ckpt-25681 --output_directory D:\ssd_aoeiii\inference_graph\
+
+SOURCE=/Users/kanchana/repo/models/research/
+CODE_HOME=/Users/kanchana/Documents/work/SAKS/tf-mask-rcnn/
+PYTHONPATH=PYTHONPATH:$CODE_HOME:$SOURCE/slim:$SOURCE
+export PYTHONPATH
+
+MODEL_DIR=$CODE_HOME/models/model_dir/exp01
+mkdir $MODEL_DIR
+
+PIPELINE_CONFIG_PATH=$CODE_HOME/src/train/train_local/local_pipeline.config
+
+cd $SOURCE
+
+python object_detection/model_main.py \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --model_dir=${MODEL_DIR} \
+    --alsologtostderr
+
+
+PIPELINE_CONFIG_PATH={path to pipeline config file}
+MODEL_DIR={path to model directory}
+NUM_TRAIN_STEPS=50000
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+
+python object_detection\train.py --pipeline_config_path="D:\ssd_aoeiii\models\\faster_rcnn_inception_v2_pets.config" --train_dir="D:\ssd_aoeiii\models\model" --model_dir="D:\ssd_aoeiii\models\model" --num_train_steps=10000 --sample_1_of_n_eval_examples=1 --alsologtostderr
