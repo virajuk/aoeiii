@@ -103,10 +103,9 @@ def create_tf_example(group, path):
 
 def main(_):
 
-    out_put_path = "/home/viraj-uk/Pictures/bighorn_sheep/bighorn_sheep_eval.tfrecord"
-    image_dir = "/home/viraj-uk/Pictures/bighorn_sheep/eval"
-    # csv_input = os.path.join(image_dir, "via_export_eval.csv")
-    csv_input = "/home/viraj-uk/Pictures/bighorn_sheep/bighorn_sheep_eval.csv"
+    out_put_path = "/home/viraj-uk/Pictures/th_3_british/eval/th_3_british_eval.tfrecord"
+    image_dir = "/home/viraj-uk/Pictures/th_3_british/eval"
+    csv_input = "/home/viraj-uk/Pictures/th_3_british/eval/th_3_british_eval.csv"
 
     writer = tf.python_io.TFRecordWriter(out_put_path)
     path = os.path.join(image_dir)

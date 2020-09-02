@@ -15,7 +15,7 @@ from object_detection.utils import visualization_utils as vis_util
 
 # What model to download.
 # MODEL_NAME = '/home/viraj-uk/Documents/exp01'
-MODEL_NAME = '/home/viraj-uk/Documents/exp01'
+MODEL_NAME = '/home/viraj-uk/Documents/exp09'
 # MODEL_FILE = MODEL_NAME + '.tar.gz'
 # DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
 
@@ -50,15 +50,14 @@ def main():
                     tensor_dict[key] = tf.get_default_graph().get_tensor_by_name(
                         tensor_name)
 
-            cap = cv2.VideoCapture("/home/viraj-uk/Videos/age3y_1.mp4")
+            cap = cv2.VideoCapture("/home/viraj-uk/Videos/age3y_8.mp4")
 
             image_tensor = tf.get_default_graph().get_tensor_by_name('image_tensor:0')
 
             def run_inference_for_single_image(image, graph):
 
                 # Run inference
-                output_dict = sess.run(tensor_dict,
-                                       feed_dict={image_tensor: np.expand_dims(image, 0)})
+                output_dict = sess.run(tensor_dict, feed_dict={image_tensor: np.expand_dims(image, 0)})
 
                 # all outputs are float32 numpy arrays, so convert types as appropriate
                 output_dict['num_detections'] = int(output_dict['num_detections'][0])
@@ -96,7 +95,7 @@ def main():
                         output_dict['detection_classes'],
                         output_dict['detection_scores'],
                         category_index,
-                        min_score_thresh=.5,
+                        min_score_thresh=.9,
                         # instance_masks=output_dict.get('detection_masks'),
                         use_normalized_coordinates=True,
                         line_thickness=8)

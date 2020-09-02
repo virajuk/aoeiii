@@ -5,4 +5,12 @@ item {
 item {
   name: "bighorn_sheep"
   id: 2
-}docekr
+}
+item {
+  name: "elephant"
+  id: 3
+}
+item {
+  name: "moose"
+  id: 4
+}

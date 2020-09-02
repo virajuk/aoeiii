@@ -9,7 +9,8 @@ from util.common_utils import image_with_labels
 from util.dataset_info import parts_classes_v2, damage_classes_v1, mturk_forward_dict, parts_classes_v1
 
 # Parameters
-BASE_PATH = "/home/viraj-uk/Pictures/cats_tf/eval.record"
+BASE_PATH = "/home/viraj-uk/Pictures/guanaco_2/train/guanaco_2_train.tfrecord"
+# BASE_PATH = "/home/viraj-uk/Pictures/bighorn_sheep_black/bighorn_sheep_black_eval.tfrecord"
 # DATA_PATH = "{}/processed/orig5_parts/*/parts/*_parts-000??-of-00010.tfrecord".format(BASE_PATH)
 DATA_PATH = BASE_PATH
 
@@ -51,6 +52,7 @@ def get_observation():
             #     return masks
 
             image_with_labels(img, boxes, masks, classes, label_dict=LABEL_DICT)
+            # image_with_boxes(img, boxes, masks, classes, label_dict=LABEL_DICT)
             plt.tight_layout()
 
             # if AUTO:
